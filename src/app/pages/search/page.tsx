@@ -80,6 +80,7 @@ const fetchRestaurantByCity = async (searchParams: SearchParams) => {
         },
       },
       slug: true,
+      reviews: true,
     },
   });
 

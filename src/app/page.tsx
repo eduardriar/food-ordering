@@ -14,6 +14,7 @@ const fetchRestaurants = async () => {
       location: true,
       price: true,
       slug: true,
+      reviews: true
     }
   });
 
