@@ -28,6 +28,7 @@ export default async function handler(request: NextApiRequest, response: NextApi
         last_name: true,
         email: true,
         phone: true,
+        city: true,
       },
     });
 

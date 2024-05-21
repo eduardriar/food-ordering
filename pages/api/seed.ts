@@ -1040,6 +1040,16 @@ export default async function handler(
     ],
   });
 
+  const userMessi = {
+    data: {
+      first_name: "Lionel Andres",
+      last_name: "Messi",
+      email: "leo@messi10.com",
+      city: "Rosario",
+      password: "C4mp3ones2023*@",
+      phone: "1112223333"
+    },
+  }
     const userLaith = await prisma.user.create({
       data: {
         first_name: "Laith",

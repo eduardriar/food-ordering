@@ -1,11 +1,10 @@
 "use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Modal as MuiModal } from "@mui/material";
+import { AuthenticationContext } from "../context/AuthContext";
 
 const style = {
   position: "absolute" as "absolute",
@@ -23,11 +22,19 @@ interface ModalProps {
 }
 
 export default function AuthModal({ isSignIn, children }: ModalProps) {
+  const {error} = useContext(AuthenticationContext);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { data } = useContext(AuthenticationContext);
 
   const renderContent = (signInContent: string, signUpContent: string) => (isSignIn ? signInContent : signUpContent);
+
+  const childrenWithProps = React.Children.map(children, child => {
+    if(React.isValidElement(child)){
+      return React.cloneElement(child, {handleClose} as any)
+    }
+  })
 
   return (
     <div>
@@ -52,7 +59,7 @@ export default function AuthModal({ isSignIn, children }: ModalProps) {
                 <p className="text-sm">{renderContent("Log Into Your Account", "Create your OpenTable account")}</p>
               </h2>
             </div>
-            {children}
+            {childrenWithProps}
           </div>
         </Box>
       </MuiModal>

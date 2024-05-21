@@ -1,4 +1,3 @@
-import router from "next/router";
 import { SearchBar } from "./SearchBar";
 
 export const Header = () => {

@@ -4,7 +4,6 @@ import Image from "next/image";
 import errorMscot from "../../../../public/icons/error.png"
 
 const NotFoundError = ({error}: {error: Error}) => {
-  console.log(error.stack);
   return (
     <div className="h-screen bg-gray-200 flex flex-col justify-center items-center">
       <Image src={errorMscot} alt="Image error" className="w-56 mb-8"/>

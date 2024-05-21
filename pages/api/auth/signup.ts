@@ -9,7 +9,6 @@ const prisma = new PrismaClient();
 const handler = async (request: NextApiRequest, response: NextApiResponse) => {
   if (request.method === "POST") {
     const { firstName, lastName, email, phone, city, password } = request.body;
-    console.log(request.body);
     const errors: string[] = [];
     const validationSchema = [
       {
@@ -39,7 +38,6 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
     ];
 
     validationSchema.forEach((check) => {
-      console.log(check);
       if (!check.valid) {
         errors.push(check.errorMessage);
       }
@@ -78,16 +76,24 @@ const handler = async (request: NextApiRequest, response: NextApiResponse) => {
 
     const alg = "HS256";
     const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-    const token = await new jose.SignJWT({ email: createdUser.email })
+    const token = await new jose.SignJWT({ id: createdUser.id, email: createdUser.email })
       .setProtectedHeader({ alg })
       .setExpirationTime("24h")
       .sign(secret);
 
-    response.status(200).json({
-      data: {
-        response: token,
-      },
-    });
+    return response
+      .status(200)
+      .setHeader("Set-cookie", `jwt=${token}; Max-age=8640; Path=/`)
+      .json({
+        user: {
+          firstName: createdUser.first_name,
+          lastName: createdUser.last_name,
+          email: createdUser.email,
+          phone: createdUser.phone,
+          city: createdUser.city,
+        },
+        token: token,
+      });
   }
 
   return response.status(404).json("Unknown enpoint");

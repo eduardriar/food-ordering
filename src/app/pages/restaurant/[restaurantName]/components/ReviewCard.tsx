@@ -24,7 +24,6 @@ const fetchUser = async (id: number) => {
 export const ReviewCard: React.FC<ReviewCardProps> = async ({review}) => {
   const user = await fetchUser(review.user_id);
   const userInitials = `${user?.first_name[0]}${user?.last_name[0]}`
-  console.log(review)
   
   return (
     <div className="border-b pb-7 mb-7">
