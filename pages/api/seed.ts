@@ -11,7 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  //   await prisma.table.deleteMany();
+  await prisma.table.deleteMany();
   await prisma.review.deleteMany();
   await prisma.item.deleteMany();
   await prisma.restaurant.deleteMany();
@@ -65,6 +65,7 @@ export default async function handler(
         slug: "vivaan-fine-indian-cuisine-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "RamaKrishna Indian",
@@ -84,6 +85,7 @@ export default async function handler(
         slug: "ramakrishna-indian-restaurant-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Coconut Lagoon",
@@ -103,6 +105,7 @@ export default async function handler(
         slug: "coconut-lagoon-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Last Train to Delhi",
@@ -122,6 +125,7 @@ export default async function handler(
         slug: "last-train-to-delhi-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Adrak Yorkville",
@@ -141,6 +145,7 @@ export default async function handler(
         slug: "adrak-yorkville-toronto",
         location_id: torontoLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Curryish Tavern",
@@ -160,6 +165,7 @@ export default async function handler(
         slug: "curryish-tavern-toronto",
         location_id: torontoLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Utsav",
@@ -177,6 +183,7 @@ export default async function handler(
         slug: "utsav-toronto",
         location_id: torontoLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Pukka",
@@ -196,6 +203,7 @@ export default async function handler(
         slug: "pukka-niagara",
         location_id: niagaraLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       {
         name: "Kamasutra Indian",
@@ -215,6 +223,7 @@ export default async function handler(
         slug: "kamasutra-indian-restaurant-and-wine-bar-niagara",
         location_id: niagaraLocationId,
         cuisine_id: indianCuisineId,
+        party_size: 10,
       },
       // MEXICAN //
       {
@@ -235,6 +244,7 @@ export default async function handler(
         slug: "eldorado-taco-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       {
         name: "La Bartola",
@@ -256,6 +266,7 @@ export default async function handler(
         slug: "la-bartola-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       {
         name: "El Catrin",
@@ -275,6 +286,7 @@ export default async function handler(
         slug: "el-catrin-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       {
         name: "3 Mariachis",
@@ -294,6 +306,7 @@ export default async function handler(
         slug: "el-catrin-toronto",
         location_id: torontoLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       {
         name: "Casa Madera",
@@ -314,6 +327,7 @@ export default async function handler(
         slug: "casa-madera-toronto",
         location_id: torontoLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       {
         name: "Taco N Tequila",
@@ -334,6 +348,7 @@ export default async function handler(
         slug: "casa-madera-niagara",
         location_id: niagaraLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       {
         name: "El Jefe",
@@ -348,6 +363,7 @@ export default async function handler(
         slug: "el-jefe-niagara",
         location_id: niagaraLocationId,
         cuisine_id: mexicanCuisineId,
+        party_size: 10,
       },
       // ITALIAN //
       {
@@ -370,6 +386,7 @@ export default async function handler(
         slug: "cano-restaurant-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "Blu Ristorante",
@@ -391,6 +408,7 @@ export default async function handler(
         slug: "blu-ristorante-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "Stelvio",
@@ -411,6 +429,7 @@ export default async function handler(
         slug: "stelvio-ottawa",
         location_id: ottawaLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "Terroni Adelaide",
@@ -431,6 +450,7 @@ export default async function handler(
         slug: "terroni-adelaide-niagara",
         location_id: niagaraLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "EST Restaurant",
@@ -453,6 +473,7 @@ export default async function handler(
         slug: "est-restaurant-niagara",
         location_id: niagaraLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "Sofia",
@@ -473,6 +494,7 @@ export default async function handler(
         slug: "sofia-toronto",
         location_id: torontoLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "Terroni Sud Forno",
@@ -493,6 +515,7 @@ export default async function handler(
         slug: "terroni-sud-forno-produzione-e-spaccio-toronto",
         location_id: torontoLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
       {
         name: "il Padrino",
@@ -513,6 +536,7 @@ export default async function handler(
         slug: "il-padrino-toronto",
         location_id: torontoLocationId,
         cuisine_id: italianCuisineId,
+        party_size: 10,
       },
     ],
   });
@@ -1315,22 +1339,22 @@ export default async function handler(
       ],
     });
 
-    // await prisma.table.createMany({
-    //   data: [
-    //     {
-    //       restaurant_id: vivaanId,
-    //       seats: 4,
-    //     },
-    //     {
-    //       restaurant_id: vivaanId,
-    //       seats: 4,
-    //     },
-    //     {
-    //       restaurant_id: vivaanId,
-    //       seats: 2,
-    //     },
-    //   ],
-    // });
+    await prisma.table.createMany({
+      data: [
+        {
+          restaurant_id: vivaanId,
+          seats: 4,
+        },
+        {
+          restaurant_id: vivaanId,
+          seats: 4,
+        },
+        {
+          restaurant_id: vivaanId,
+          seats: 2,
+        },
+      ],
+    });
 
   res.status(200).json({ name: "hello" });
 }

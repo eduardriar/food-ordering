@@ -15,7 +15,10 @@ interface Restaurant {
   images: string[];
   description: string;
   slug: string;
-  reviews: Review[]
+  reviews: Review[];
+  party_size: number;
+  open_time: string;
+  close_time: string;
 }
 
 const prisma = new PrismaClient();
@@ -32,11 +35,14 @@ const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
       description: true,
       slug: true,
       reviews: true,
+      party_size: true,
+      open_time: true,
+      close_time: true,
     },
   });
 
   // if(!restaurant) throw new Error("Cannot find a restaurant");
-  if(!restaurant) notFound();
+  if (!restaurant) notFound();
 
   return restaurant;
 };
@@ -50,22 +56,27 @@ export const metadata: Metadata = {
   },
 };
 
-const RestaurantDetailsPage = async ({params}: {params: {restaurantName: string}}) => {
+const RestaurantDetailsPage = async ({ params }: { params: { restaurantName: string } }) => {
   const restaurantName = params.restaurantName;
   const restaurant = await fetchRestaurant(restaurantName);
 
   return (
     <>
       <div className="bg-white w-[70%] rounded p-3 shadow">
-        <RestaurantNavBar slug={restaurant.slug}/>
-        <Title name={restaurant.name}/>
-        <Rating reviews={restaurant.reviews}/>
-        <Description description={restaurant.description}/>
-        <Images images={restaurant.images}/>
-        <Reviews reviews={restaurant.reviews}/>
+        <RestaurantNavBar slug={restaurant.slug} />
+        <Title name={restaurant.name} />
+        <Rating reviews={restaurant.reviews} />
+        <Description description={restaurant.description} />
+        <Images images={restaurant.images} />
+        <Reviews reviews={restaurant.reviews} />
       </div>
       <div className="w-[27%] relative text-reg">
-        <ReservationCard />
+        <ReservationCard
+          partySize={restaurant.party_size}
+          openTime={restaurant.open_time}
+          closeTime={restaurant.close_time}
+          slug={restaurant.slug}
+        />
       </div>
     </>
   );
