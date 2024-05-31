@@ -4,8 +4,6 @@ import Image from "next/image";
 import fullStar from "../../../public/icons/full-star.png";
 import emptyStar from "../../../public/icons/empty-star.png";
 import halfStar from "../../../public/icons/half-star.png";
-import { Review } from "@prisma/client";
-import { calculateReviewRatingAverage } from "../../../utils/calculateReviewRatingAverage";
 
 export const Stars = ({ rating }: { rating: number }) => {
   const renderStars = (): React.JSX.Element[] => {

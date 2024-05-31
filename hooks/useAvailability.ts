@@ -39,7 +39,6 @@ const useAvailability = () => {
     }));
 
     try {
-      console.log(day)
       const response = await axios.get(`http://127.0.0.1:3000/api/restaurant/${slug}/availability`, {
         params: {
           day,
@@ -54,6 +53,7 @@ const useAvailability = () => {
         loading: false,
       }));
     } catch (error: any) {
+      console.log(error);
       setAvailability((prevState) => ({
         ...prevState,
         error: [error.response.data.errorMessage] || [error.message],

@@ -6,15 +6,15 @@ import useAvailability from "../../../../../../hooks/useAvailability";
 import { CircularProgress } from "@mui/material";
 import Link from "next/link";
 import { Time, convertToDisplayTime } from "../../../../../../utils/convertToDisplayTime";
+import { Restaurant } from "@prisma/client";
 
 interface ReservationCardProps {
-  partySize: number;
-  openTime: string;
-  closeTime: string;
-  slug: string;
+  restaurant: Restaurant;
 }
 
-export const ReservationCard: React.FC<ReservationCardProps> = ({ partySize, openTime, closeTime, slug }) => {
+export const ReservationCard: React.FC<ReservationCardProps> = ({ restaurant }) => {
+  console.log(restaurant)
+  const { open_time: openTime, close_time: closeTime, party_size: partySize, slug } = restaurant;
   const {
     availability: { loading, data, error },
     fetchAvailability,
@@ -78,10 +78,6 @@ export const ReservationCard: React.FC<ReservationCardProps> = ({ partySize, ope
     });
   };
 
-  useEffect(() => {
-    console.log(data);
-  }, [data])
-
   return (
     <div className="fixed w-[15%] bg-white rounded p-3 shadow">
       <div className="text-center border-b pb-2 font-bold">
@@ -132,12 +128,24 @@ export const ReservationCard: React.FC<ReservationCardProps> = ({ partySize, ope
               <div key={time.time}>
                 {time.availability ? (
                   <Link
-                    href={`/reserve/${slug}?date=${selectedDate}T${time.time}&partySize=${partySize}`}
+                    href={{
+                      pathname: `/pages/reserve/${slug}?date=${selectedDate}T${time.time}&partySize=${partySize}`,
+                      query: {
+                        restaurantName: restaurant.name,
+                        restaurantImage: restaurant.main_image,
+                        restaurantSlug: restaurant.slug,
+                        date: selectedDate,
+                        time: time.time,
+                        partySize: partySize,
+                      }
+                    }}
                     className="bg-red-600 cursor-pointer p-2 w-24 text-center text-white mb-3 rounded block mr-3">
                     <p className="text-sm-font-bold">{convertToDisplayTime(time.time as Time)}</p>
                   </Link>
                 ) : (
-                  <p className="bg-gray-300 p-2 w-24 text-center text-white mb-3 rounded mr-3">{convertToDisplayTime(time.time as Time)}</p>
+                  <p className="bg-gray-300 p-2 w-24 text-center text-white mb-3 rounded mr-3">
+                    {convertToDisplayTime(time.time as Time)}
+                  </p>
                 )}
               </div>
             ))}

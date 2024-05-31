@@ -6,10 +6,10 @@ import { Images } from "./components/Images";
 import { Reviews } from "./components/Reviews";
 import { ReservationCard } from "./components/ReservationCard";
 import { Metadata } from "next";
-import { PrismaClient, Review } from "@prisma/client";
+import { PrismaClient, Restaurant, Review } from "@prisma/client";
 import { notFound } from "next/navigation";
 
-interface Restaurant {
+interface RestaurantComplete extends Restaurant {
   id: number;
   name: string;
   images: string[];
@@ -23,7 +23,7 @@ interface Restaurant {
 
 const prisma = new PrismaClient();
 
-const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
+const fetchRestaurant = async (slug: string): Promise<RestaurantComplete> => {
   const restaurant = await prisma.restaurant.findUnique({
     where: {
       slug,
@@ -31,13 +31,19 @@ const fetchRestaurant = async (slug: string): Promise<Restaurant> => {
     select: {
       id: true,
       name: true,
+      main_image: true,
       images: true,
       description: true,
-      slug: true,
-      reviews: true,
-      party_size: true,
       open_time: true,
       close_time: true,
+      slug: true,
+      price: true,
+      location_id: true,
+      cuisine_id: true,
+      created_at: true,
+      updated_ate: true,
+      party_size: true,
+      reviews: true,
     },
   });
 
@@ -59,7 +65,7 @@ export const metadata: Metadata = {
 const RestaurantDetailsPage = async ({ params }: { params: { restaurantName: string } }) => {
   const restaurantName = params.restaurantName;
   const restaurant = await fetchRestaurant(restaurantName);
-
+  
   return (
     <>
       <div className="bg-white w-[70%] rounded p-3 shadow">
@@ -71,12 +77,7 @@ const RestaurantDetailsPage = async ({ params }: { params: { restaurantName: str
         <Reviews reviews={restaurant.reviews} />
       </div>
       <div className="w-[27%] relative text-reg">
-        <ReservationCard
-          partySize={restaurant.party_size}
-          openTime={restaurant.open_time}
-          closeTime={restaurant.close_time}
-          slug={restaurant.slug}
-        />
+        <ReservationCard restaurant={restaurant} />
       </div>
     </>
   );
